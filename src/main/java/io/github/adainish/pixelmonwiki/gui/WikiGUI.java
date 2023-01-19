@@ -68,11 +68,11 @@ public class WikiGUI
                 Pokemon finalCurrentPokemon = currentPokemon;
                 GooeyButton button = GooeyButton.builder()
                         .display(SpriteItemHelper.getPhoto(currentPokemon))
-                        .title(InfoUtil.returnPokemonNameString(currentPokemon))
+                        .title(formattedString(InfoUtil.returnPokemonNameString(currentPokemon)))
                         .onClick(buttonAction -> {
                             UIManager.openUIForcefully(playerEntity, MainWikiPage(finalCurrentPokemon, playerEntity));
                         })
-                        .lore(description)
+                        .lore(formattedArrayList(description))
                         .build();
                 buttons.add(button);
             } else if (i == 1)
@@ -83,11 +83,11 @@ public class WikiGUI
                 Pokemon finalCurrentPokemon = currentPokemon;
                 GooeyButton button = GooeyButton.builder()
                         .display(SpriteItemHelper.getPhoto(currentPokemon))
-                        .title(InfoUtil.returnPokemonNameString(currentPokemon))
+                        .title(formattedString(InfoUtil.returnPokemonNameString(currentPokemon)))
                         .onClick(buttonAction -> {
                             UIManager.openUIForcefully(playerEntity, MainWikiPage(finalCurrentPokemon, playerEntity));
                         })
-                        .lore(description)
+                        .lore(formattedArrayList(description))
                         .build();
                 buttons.add(button);
             } else {
@@ -97,11 +97,11 @@ public class WikiGUI
                 Pokemon finalCurrentPokemon = currentPokemon;
                 GooeyButton button = GooeyButton.builder()
                         .display(SpriteItemHelper.getPhoto(currentPokemon))
-                        .title(InfoUtil.returnPokemonNameString(currentPokemon))
+                        .title(formattedString(InfoUtil.returnPokemonNameString(currentPokemon)))
                         .onClick(buttonAction -> {
                             UIManager.openUIForcefully(playerEntity, MainWikiPage(finalCurrentPokemon, playerEntity));
                         })
-                        .lore(description)
+                        .lore(formattedArrayList(description))
                         .build();
                 buttons.add(button);
             }
@@ -118,7 +118,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.rumble_badge))
                 .title("Effectiveness")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -130,7 +130,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.tm_gen1))
                 .title("Level up Moves")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -148,7 +148,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.tm_gen1))
                 .title("TM/HM/TR Moves")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -160,7 +160,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.tm_gen1))
                 .title("Tutor Moves")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -172,7 +172,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.tm_gen1))
                 .title("Transfer Moves")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -187,7 +187,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(Items.DIAMOND))
                 .title("Drops")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -200,7 +200,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.up_grade))
                 .title("Evolutions")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -213,7 +213,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.power_weight))
                 .title("EV Yield")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -226,7 +226,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.ability_capsule))
                 .title("Abilities")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -238,7 +238,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.poke_ball))
                 .title("Catch Rate")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -250,7 +250,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(Items.PAPER))
                 .title("Spawn Location")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -262,7 +262,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(Items.CLOCK))
                 .title("Spawn Time")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -276,7 +276,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(Items.OAK_SAPLING))
                 .title("Biomes")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -290,8 +290,22 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.weakness_policy))
                 .title("Base Stats")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
+    }
+
+    public static String formattedString(String s) {
+        return s.replaceAll("&", "§");
+    }
+
+    public static List <String> formattedArrayList(List<String> list) {
+
+        List<String> formattedList = new ArrayList <>();
+        for (String s:list) {
+            formattedList.add(formattedString(s));
+        }
+
+        return formattedList;
     }
 
     public static GooeyButton TypeButton(Pokemon pokemon) {
@@ -306,7 +320,7 @@ public class WikiGUI
         return GooeyButton.builder()
                 .display(new ItemStack(PixelmonItems.marsh_badge))
                 .title("Type")
-                .lore(lore)
+                .lore(formattedArrayList(lore))
                 .build();
     }
 
@@ -336,6 +350,6 @@ public class WikiGUI
                 .line(LineType.VERTICAL, 1, 1, 3, placeHolderButton)
                 .build();
 
-        return PaginationHelper.createPagesFromPlaceholders(template, pokemonButtons(pokemon, playerEntity), LinkedPage.builder().title("Wikipedia").template(template));
+        return PaginationHelper.createPagesFromPlaceholders(template, pokemonButtons(pokemon, playerEntity), LinkedPage.builder().title("Pixelmon Wiki").template(template));
     }
 }
