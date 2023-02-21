@@ -62,7 +62,6 @@ public class WikiGUI
         for (int i = 0; i < 3; i++) {
             if (i == 0)
             {
-
                 currentPokemon = getPreviousPokemon(pokemon);
                 description.add(InfoUtil.returnPokemonDescription(currentPokemon, playerEntity).getString());
                 Pokemon finalCurrentPokemon = currentPokemon;
