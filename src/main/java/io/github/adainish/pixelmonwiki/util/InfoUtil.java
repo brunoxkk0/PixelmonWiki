@@ -346,8 +346,8 @@ public class InfoUtil {
                             }
                         }
 
-                        if (info.condition.weathers != null) {
-                            var13 = info.condition.weathers.iterator();
+                        if (info.condition.cachedWeathers != null) {
+                            var13 = info.condition.cachedWeathers.iterator();
 
                             while (var13.hasNext()) {
                                 WeatherType weather = (WeatherType) var13.next();
