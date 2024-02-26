@@ -12,7 +12,7 @@ public class PermissionUtil {
      * Checks if the player has the permission
      * If the supplied CommandSource is not a player it checks if it is the server
      *
-     * @param cs the CommandSource whose permission should be checked
+     * @param cs   the CommandSource whose permission should be checked
      * @param perm the permission that should be checked
      * @return if the CommandSource has that permission or is the server
      */
@@ -28,7 +28,7 @@ public class PermissionUtil {
      * Checks if the player has the permission
      *
      * @param player who should be checked
-     * @param perm the permission that should be checked
+     * @param perm   the permission that should be checked
      * @return if the player has the permission
      */
     public static boolean checkPerm(ServerPlayerEntity player, String perm) {

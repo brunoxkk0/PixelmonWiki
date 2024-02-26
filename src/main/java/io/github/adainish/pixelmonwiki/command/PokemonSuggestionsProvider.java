@@ -11,10 +11,10 @@ import net.minecraft.command.CommandSource;
 
 import java.util.concurrent.CompletableFuture;
 
-public class PokemonSuggestionsProvider implements SuggestionProvider <CommandSource> {
+public class PokemonSuggestionsProvider implements SuggestionProvider<CommandSource> {
 
     @Override
-    public CompletableFuture <Suggestions> getSuggestions(CommandContext <CommandSource> context, SuggestionsBuilder builder) throws CommandSyntaxException {
+    public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSource> context, SuggestionsBuilder builder) throws CommandSyntaxException {
         PixelmonSpecies.getAll().stream().map(Species::getName).forEach(builder::suggest);
         return builder.buildFuture();
     }

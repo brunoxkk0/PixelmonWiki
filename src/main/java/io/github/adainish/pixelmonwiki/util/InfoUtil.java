@@ -29,14 +29,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class InfoUtil {
-    public static Pokemon returnPokemonFromDexNumber(int number)
-    {
+
+    public static Pokemon returnPokemonFromDexNumber(int number) {
         Species species = PixelmonSpecies.MISSINGNO.getValueUnsafe();
         if (PixelmonSpecies.fromDex(number).isPresent()) {
             species = PixelmonSpecies.fromDex(number).get();
@@ -44,14 +41,12 @@ public class InfoUtil {
         return PokemonFactory.create(species);
     }
 
-    public static String returnPokemonNameString(Pokemon pokemon)
-    {
+    public static String returnPokemonNameString(Pokemon pokemon) {
         String translatedString = TranslateUtil.getTranslatedString(pokemon.getTranslationKey());
         return "&b[%dex%] &7".replace("%dex%", String.valueOf(pokemon.getSpecies().getDex())) + translatedString;
     }
 
-    public static ITextComponent returnPokemonNameComponent(Pokemon pokemon)
-    {
+    public static ITextComponent returnPokemonNameComponent(Pokemon pokemon) {
         String translatedString = TranslateUtil.getTranslatedString(pokemon.getTranslationKey());
         return new StringTextComponent("&b[%dex%] &7".replace("%dex%", String.valueOf(pokemon.getSpecies().getDex())) + translatedString);
     }
@@ -61,63 +56,83 @@ public class InfoUtil {
         return new StringTextComponent("&7" + translatedString);
     }
 
-    public static List <ITextComponent> returnPokemonEggMoves(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        for (ImmutableAttack attack:pokemon.getForm().getMoves().getEggMoves()) {
+    public static List<ITextComponent> returnPokemonEggMoves(Pokemon pokemon) {
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+
+        for (ImmutableAttack attack : pokemon.getForm().getMoves().getEggMoves()) {
             String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
             StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
             iTextComponents.add(translationTextComponent);
         }
+
         return iTextComponents;
     }
 
     public static List<ITextComponent> returnPokemonHMMoves(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        for (ImmutableAttack attack:pokemon.getForm().getMoves().getHMMoves()) {
-            String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
-            StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
-            iTextComponents.add(translationTextComponent);
-        }
+
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+
+        try{
+            for (ImmutableAttack attack : pokemon.getForm().getMoves().getHMMoves()) {
+                String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
+                StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
+                iTextComponents.add(translationTextComponent);
+            }
+        }catch (Exception ignored){}
+
         return iTextComponents;
     }
 
     public static List<ITextComponent> returnPokemonTMMoves(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        for (ImmutableAttack attack:pokemon.getForm().getMoves().getTMMoves()) {
-            String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
-            StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
-            iTextComponents.add(translationTextComponent);
-        }
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+
+        try{
+            for (ImmutableAttack attack : pokemon.getForm().getMoves().getTMMoves()) {
+                String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
+                StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
+                iTextComponents.add(translationTextComponent);
+            }
+        }catch (Exception ignored){}
+
         return iTextComponents;
     }
 
     public static List<ITextComponent> returnPokemonLevelUpMoves(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        for (ImmutableAttack attack:pokemon.getForm().getMoves().getAllLevelUpMoves()) {
-            String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
-            StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
-            iTextComponents.add(translationTextComponent);
-        }
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+
+        try{
+            for (ImmutableAttack attack : pokemon.getForm().getMoves().getAllLevelUpMoves()) {
+                String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
+                StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
+                iTextComponents.add(translationTextComponent);
+            }
+        }catch (Exception ignored){}
+
         return iTextComponents;
     }
 
     public static List<ITextComponent> returnEvolutions(Pokemon pokemon) {
-        List <ITextComponent> iTextComponents = new ArrayList <>();
-        for (Species species : pokemon.getForm().getPreEvolutions()) {
-            String translatedString = TranslateUtil.getTranslatedString(species.getTranslationKey());
-            StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
-            iTextComponents.add(translationTextComponent);
-        }
-        for (Evolution evolution : pokemon.getForm().getEvolutions()) {
-            String translatedString = TranslateUtil.getTranslatedString(evolution.to.create().getTranslationKey());
-            StringTextComponent translationTextComponent = new StringTextComponent("&7" +  translatedString);
-            iTextComponents.add(translationTextComponent);
-        }
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+
+        try{
+            for (Species species : pokemon.getForm().getPreEvolutions()) {
+                String translatedString = TranslateUtil.getTranslatedString(species.getTranslationKey());
+                StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
+                iTextComponents.add(translationTextComponent);
+            }
+
+            for (Evolution evolution : pokemon.getForm().getEvolutions()) {
+                String translatedString = TranslateUtil.getTranslatedString(evolution.to.create().getTranslationKey());
+                StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
+                iTextComponents.add(translationTextComponent);
+            }
+        }catch (Exception ignored){}
+
         return iTextComponents;
     }
 
     public static List<ITextComponent> returnAbilities(Pokemon pokemon) {
-        List <ITextComponent> iTextComponents = new ArrayList <>();
+        List<ITextComponent> iTextComponents = new ArrayList<>();
         for (Ability ability : pokemon.getForm().getAbilities().getAll()) {
             String translatedString = TranslateUtil.getTranslatedString(ability.getTranslationKey());
             StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
@@ -127,10 +142,10 @@ public class InfoUtil {
     }
 
     public static List<ITextComponent> returnEVYield(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        for (BattleStatsType statType:BattleStatsType.EV_IV_STATS) {
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+        for (BattleStatsType statType : BattleStatsType.EV_IV_STATS) {
             String colourPrefix = "&";
-            switch (statType){
+            switch (statType) {
                 case HP:
                     colourPrefix += "a";
                     break;
@@ -160,13 +175,10 @@ public class InfoUtil {
         return iTextComponents;
     }
 
-    public static String getColourFormatFromElement(Element element)
-    {
+    public static String getColourFormatFromElement(Element element) {
         String typingPrefix = "&";
-        switch (element)
-        {
-            case NORMAL:
-            {
+        switch (element) {
+            case NORMAL: {
                 typingPrefix += "f";
                 break;
             }
@@ -217,15 +229,15 @@ public class InfoUtil {
     }
 
     public static List<ITextComponent> returnCatchRates(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
+        List<ITextComponent> iTextComponents = new ArrayList<>();
         iTextComponents.add(new StringTextComponent("&7" + pokemon.getForm().getCatchRate()));
         return iTextComponents;
     }
 
     public static List<ITextComponent> returnEggGroups(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
+        List<ITextComponent> iTextComponents = new ArrayList<>();
         iTextComponents.add(new StringTextComponent("&bEgg Groups:"));
-        for (EggGroup group:pokemon.getForm().getEggGroups()) {
+        for (EggGroup group : pokemon.getForm().getEggGroups()) {
             String translatedString = TranslateUtil.getTranslatedString(group.getTranslationKey());
             StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
             iTextComponents.add(translationTextComponent);
@@ -234,9 +246,9 @@ public class InfoUtil {
     }
 
     public static List<ITextComponent> returnPokemonTypes(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
+        List<ITextComponent> iTextComponents = new ArrayList<>();
         iTextComponents.add(new StringTextComponent("&eTypings:"));
-        for (Element pokemonElement:pokemon.getForm().getTypes()) {
+        for (Element pokemonElement : pokemon.getForm().getTypes()) {
             String translatedString = TranslateUtil.getTranslatedString(pokemonElement.getTranslationKey());
 
             StringTextComponent translationTextComponent = new StringTextComponent(getColourFormatFromElement(pokemonElement) + translatedString);
@@ -247,65 +259,79 @@ public class InfoUtil {
     }
 
     public static List<ITextComponent> returnEffectiveness(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        List<String> addedList = new ArrayList <>();
-        for (Element element:Element.values()) {
-            for (Element pokemonElement:pokemon.getForm().getTypes()) {
-                Effectiveness effectiveness = Element.getEffectiveness(element, pokemonElement);
-                String text = TranslateUtil.getTranslatedString(element.getTranslationKey());
-                if (addedList.contains(text))
-                    continue;
-                if (text.equalsIgnoreCase("type.mystery"))
-                    continue;
-                StringTextComponent translatedEffectiveness = new StringTextComponent(getColourFormatFromElement(element) + text + " x" + effectiveness.value);
-                addedList.add(text);
-                iTextComponents.add(translatedEffectiveness);
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+        List<String> addedList = new ArrayList<>();
+
+        try{
+            for (Element element : Element.values()) {
+                for (Element pokemonElement : pokemon.getForm().getTypes()) {
+                    Effectiveness effectiveness = Element.getEffectiveness(element, pokemonElement);
+                    String text = TranslateUtil.getTranslatedString(element.getTranslationKey());
+                    if (addedList.contains(text))
+                        continue;
+                    if (text.equalsIgnoreCase("type.mystery"))
+                        continue;
+                    StringTextComponent translatedEffectiveness = new StringTextComponent(getColourFormatFromElement(element) + text + " x" + effectiveness.value);
+                    addedList.add(text);
+                    iTextComponents.add(translatedEffectiveness);
+                }
             }
-        }
+        }catch (Exception ignored){}
 
         return iTextComponents;
     }
 
     public static List<ITextComponent> returnPokemonTransferMoves(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        for (ImmutableAttack attack:pokemon.getForm().getMoves().getTransferMoves()) {
-            String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
-            StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
-            iTextComponents.add(translationTextComponent);
-        }
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+
+        try{
+            for (ImmutableAttack attack : pokemon.getForm().getMoves().getTransferMoves()) {
+                String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
+                StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
+                iTextComponents.add(translationTextComponent);
+            }
+        }catch (Exception ignored){}
+
         return iTextComponents;
     }
 
     public static List<ITextComponent> returnPokemonTutorMoves(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        for (ImmutableAttack attack:pokemon.getForm().getMoves().getTutorMoves()) {
-            String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
-            StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
-            iTextComponents.add(translationTextComponent);
-        }
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+
+        try{
+            for (ImmutableAttack attack : pokemon.getForm().getMoves().getTutorMoves()) {
+                String translatedString = TranslateUtil.getTranslatedString(attack.getTranslationKey());
+                StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
+                iTextComponents.add(translationTextComponent);
+            }
+        }catch (Exception ignored){}
+
         return iTextComponents;
     }
 
     public static List<ITextComponent> returnPokemonTRMoves(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        for (Gen8TechnicalRecords attack:pokemon.getForm().getMoves().getTRMoves()) {
-            String translatedString = TranslateUtil.getTranslatedString(attack.getAttack().getTranslationKey());
-            StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
-            iTextComponents.add(translationTextComponent);
-        }
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+
+        try{
+            for (Gen8TechnicalRecords attack : pokemon.getForm().getMoves().getTRMoves()) {
+                String translatedString = TranslateUtil.getTranslatedString(attack.getAttack().getTranslationKey());
+                StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
+                iTextComponents.add(translationTextComponent);
+            }
+        }catch (Exception ignored){}
+
         return iTextComponents;
     }
 
-    public static List<PlayerPokedex.PokedexSpawnData> returnDexSpawnData(Pokemon pokemon)
-    {
+    public static List<PlayerPokedex.PokedexSpawnData> returnDexSpawnData(Pokemon pokemon) {
         List<PlayerPokedex.PokedexSpawnData> spawnData = Lists.newArrayList();
         Species species = pokemon.getSpecies();
-        List<SpawnSet> spawns =PixelmonSpecies.getLegendaries().stream().anyMatch((e) -> species.getDex() == e) ? PixelmonSpawning.legendaries : PixelmonSpawning.standard;
+        List<SpawnSet> spawns = PixelmonSpecies.getLegendaries().stream().anyMatch((e) -> species.getDex() == e) ? PixelmonSpawning.legendaries : PixelmonSpawning.standard;
         if (species != null) {
-            Iterator <SpawnSet> var6 = spawns.iterator();
+            Iterator<SpawnSet> var6 = spawns.iterator();
 
             label85:
-            while(true) {
+            while (true) {
                 SpawnSet spawn;
                 do {
                     if (!var6.hasNext()) {
@@ -313,9 +339,9 @@ public class InfoUtil {
                     }
 
                     spawn = var6.next();
-                } while(!spawn.id.equalsIgnoreCase(species.getName()));
+                } while (!spawn.id.equalsIgnoreCase(species.getName()));
 
-                Iterator <SpawnInfo> var8 = spawn.spawnInfos.iterator();
+                Iterator<SpawnInfo> var8 = spawn.spawnInfos.iterator();
 
                 do {
                     SpawnInfo info;
@@ -371,13 +397,13 @@ public class InfoUtil {
     }
 
     public static List<ITextComponent> returnPokemonDrops(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
+        List<ITextComponent> iTextComponents = new ArrayList<>();
         List<ItemWithChance> itemWithChancesList = returnDropInfoFromSpecies(pokemon.getSpecies());
         if (itemWithChancesList.isEmpty()) {
             iTextComponents.add(new StringTextComponent("No drops available as data could not be loaded"));
             return iTextComponents;
         }
-        for (ItemWithChance itemWithChance:itemWithChancesList) {
+        for (ItemWithChance itemWithChance : itemWithChancesList) {
             String translatedString = TranslateUtil.getTranslatedString(itemWithChance.getItemStack().getTranslationKey());
             StringTextComponent translationTextComponent = new StringTextComponent("&7" + translatedString);
             iTextComponents.add(translationTextComponent);
@@ -386,12 +412,11 @@ public class InfoUtil {
         return iTextComponents;
     }
 
-    public static List <String> getBaseStatsFromSpecies(Pokemon pokemon)
-    {
-        List<String> strings = new ArrayList <>();
-        for (BattleStatsType bt:BattleStatsType.EV_IV_STATS) {
+    public static List<String> getBaseStatsFromSpecies(Pokemon pokemon) {
+        List<String> strings = new ArrayList<>();
+        for (BattleStatsType bt : BattleStatsType.EV_IV_STATS) {
             String colourPrefix = "&";
-            switch (bt){
+            switch (bt) {
                 case HP:
                     colourPrefix += "a";
                     break;
@@ -421,19 +446,22 @@ public class InfoUtil {
         return strings;
     }
 
-    public static List<ItemWithChance> returnDropInfoFromSpecies(Species species)
-    {
-        List<ItemWithChance> itemWithChances = new ArrayList <>();
-        Set <PokemonDropInformation> dropList = DropItemRegistry.pokemonDrops.get(species);
-        for (PokemonDropInformation pokemonDropInformation:dropList) {
+    public static List<ItemWithChance> returnDropInfoFromSpecies(Species species) {
+
+        List<ItemWithChance> itemWithChances = new ArrayList<>();
+
+        Set<PokemonDropInformation> dropList = DropItemRegistry.pokemonDrops.getOrDefault(species, new HashSet<>());
+
+        for (PokemonDropInformation pokemonDropInformation : dropList) {
             itemWithChances.addAll(pokemonDropInformation.getDrops());
         }
+
         return itemWithChances;
     }
 
 
     public static List<ITextComponent> returnPokemonBaseStats(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
+        List<ITextComponent> iTextComponents = new ArrayList<>();
         getBaseStatsFromSpecies(pokemon).forEach((string) -> {
             iTextComponents.add(new StringTextComponent(string));
         });
@@ -441,11 +469,11 @@ public class InfoUtil {
     }
 
     public static List<ITextComponent> returnPokemonSpawnTimes(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        List<String> addedList = new ArrayList <>();
-        List <PlayerPokedex.PokedexSpawnData> data = returnDexSpawnData(pokemon);
-        for (PlayerPokedex.PokedexSpawnData spawnData:data) {
-            for (WorldTime time:spawnData.getTimes()) {
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+        List<String> addedList = new ArrayList<>();
+        List<PlayerPokedex.PokedexSpawnData> data = returnDexSpawnData(pokemon);
+        for (PlayerPokedex.PokedexSpawnData spawnData : data) {
+            for (WorldTime time : spawnData.getTimes()) {
                 String text = TranslateUtil.getTranslatedString(time.getTranslationKey());
                 if (addedList.contains(text))
                     continue;
@@ -458,10 +486,10 @@ public class InfoUtil {
     }
 
     public static List<ITextComponent> returnPokemonSpawnBiomes(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
-        List<String> addedList = new ArrayList <>();
-        List <PlayerPokedex.PokedexSpawnData> data = returnDexSpawnData(pokemon);
-        for (PlayerPokedex.PokedexSpawnData spawnData:data) {
+        List<ITextComponent> iTextComponents = new ArrayList<>();
+        List<String> addedList = new ArrayList<>();
+        List<PlayerPokedex.PokedexSpawnData> data = returnDexSpawnData(pokemon);
+        for (PlayerPokedex.PokedexSpawnData spawnData : data) {
             String text = spawnData.getBiome();
             if (addedList.contains(text))
                 continue;
@@ -472,9 +500,9 @@ public class InfoUtil {
     }
 
     public static List<ITextComponent> returnPokemonSpawnLocationTypes(Pokemon pokemon) {
-        List<ITextComponent> iTextComponents = new ArrayList <>();
+        List<ITextComponent> iTextComponents = new ArrayList<>();
 
-        for (SpawnLocationType locationType:pokemon.getForm().getSpawn().getSpawnLocations()) {
+        for (SpawnLocationType locationType : pokemon.getForm().getSpawn().getSpawnLocations()) {
             iTextComponents.add(new StringTextComponent("&7" + locationType.name()));
         }
 

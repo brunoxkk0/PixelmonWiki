@@ -7,15 +7,13 @@ import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.api.pokemon.PokemonFactory;
 import com.pixelmonmod.pixelmon.api.pokemon.species.Species;
 import com.pixelmonmod.pixelmon.api.registries.PixelmonSpecies;
-import com.pixelmonmod.pixelmon.command.PixelmonCommands;
 import io.github.adainish.pixelmonwiki.gui.WikiGUI;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.util.text.StringTextComponent;
 
 public class Command {
-    public static LiteralArgumentBuilder <CommandSource> getCommand()
-    {
+    public static LiteralArgumentBuilder<CommandSource> getCommand() {
         return Commands.literal("pwiki")
                 .executes(cc -> {
                     try {

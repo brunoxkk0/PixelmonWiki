@@ -25,8 +25,8 @@ import net.minecraft.util.text.ITextComponent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WikiGUI
-{
+public class WikiGUI {
+
     public static GooeyButton filler = GooeyButton.builder()
             .display(new ItemStack(Blocks.GRAY_STAINED_GLASS_PANE, 1))
             .build();
@@ -37,8 +37,7 @@ public class WikiGUI
         else return PixelmonSpecies.MISSINGNO.getValueUnsafe();
     }
 
-    public static Pokemon getPreviousPokemon(Pokemon pokemon)
-    {
+    public static Pokemon getPreviousPokemon(Pokemon pokemon) {
         int dexNumber = pokemon.getSpecies().getDex();
         if (dexNumber == 1)
             return pokemon;
@@ -46,22 +45,18 @@ public class WikiGUI
         return PokemonFactory.create(getSafeSpeciesFromDex(dexNumber));
     }
 
-    public static Pokemon getNextPokemon(Pokemon pokemon)
-    {
+    public static Pokemon getNextPokemon(Pokemon pokemon) {
         int dexNumber = pokemon.getSpecies().getDex() + 1;
         return PokemonFactory.create(getSafeSpeciesFromDex(dexNumber));
     }
 
-    public static List <Button> pokemonButtons(Pokemon pokemon, ServerPlayerEntity playerEntity)
-    {
-        List <Button> buttons = new ArrayList <>();
-
+    public static List<Button> pokemonButtons(Pokemon pokemon, ServerPlayerEntity playerEntity) {
+        List<Button> buttons = new ArrayList<>();
 
         Pokemon currentPokemon;
-        List<String> description = new ArrayList <>();
+        List<String> description = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            if (i == 0)
-            {
+            if (i == 0) {
                 currentPokemon = getPreviousPokemon(pokemon);
                 description.add(InfoUtil.returnPokemonDescription(currentPokemon, playerEntity).getString());
                 Pokemon finalCurrentPokemon = currentPokemon;
@@ -74,8 +69,7 @@ public class WikiGUI
                         .lore(formattedArrayList(description))
                         .build();
                 buttons.add(button);
-            } else if (i == 1)
-            {
+            } else if (i == 1) {
                 description.clear();
                 currentPokemon = pokemon;
                 description.add(InfoUtil.returnPokemonDescription(currentPokemon, playerEntity).getString());
@@ -110,8 +104,8 @@ public class WikiGUI
     }
 
     public static GooeyButton EffectivenessButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnEffectiveness(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnEffectiveness(pokemon)) {
             lore.add(component.getString());
         }
         return GooeyButton.builder()
@@ -122,8 +116,8 @@ public class WikiGUI
     }
 
     public static GooeyButton LevelMovesButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnPokemonLevelUpMoves(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnPokemonLevelUpMoves(pokemon)) {
             lore.add(component.getString());
         }
         return GooeyButton.builder()
@@ -134,14 +128,14 @@ public class WikiGUI
     }
 
     public static GooeyButton TMHMMovesButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnPokemonHMMoves(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnPokemonHMMoves(pokemon)) {
             lore.add(component.getString());
         }
-        for (ITextComponent component:InfoUtil.returnPokemonTMMoves(pokemon)) {
+        for (ITextComponent component : InfoUtil.returnPokemonTMMoves(pokemon)) {
             lore.add(component.getString());
         }
-        for (ITextComponent component:InfoUtil.returnPokemonTRMoves(pokemon)) {
+        for (ITextComponent component : InfoUtil.returnPokemonTRMoves(pokemon)) {
             lore.add(component.getString());
         }
         return GooeyButton.builder()
@@ -152,8 +146,8 @@ public class WikiGUI
     }
 
     public static GooeyButton TutorMovesButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnPokemonTutorMoves(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnPokemonTutorMoves(pokemon)) {
             lore.add(component.getString());
         }
         return GooeyButton.builder()
@@ -164,8 +158,8 @@ public class WikiGUI
     }
 
     public static GooeyButton TransferMovesButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnPokemonTransferMoves(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnPokemonTransferMoves(pokemon)) {
             lore.add(component.getString());
         }
         return GooeyButton.builder()
@@ -177,9 +171,9 @@ public class WikiGUI
 
 
     public static GooeyButton DropsButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
+        List<String> lore = new ArrayList<>();
 
-        for (ITextComponent component:InfoUtil.returnPokemonDrops(pokemon)) {
+        for (ITextComponent component : InfoUtil.returnPokemonDrops(pokemon)) {
             lore.add(component.getString());
         }
 
@@ -192,8 +186,8 @@ public class WikiGUI
 
 
     public static GooeyButton EvolutionsButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnEvolutions(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnEvolutions(pokemon)) {
             lore.add(component.getString());
         }
         return GooeyButton.builder()
@@ -205,8 +199,8 @@ public class WikiGUI
 
 
     public static GooeyButton EVYieldButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnEVYield(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnEVYield(pokemon)) {
             lore.add(component.getString());
         }
         return GooeyButton.builder()
@@ -218,8 +212,8 @@ public class WikiGUI
 
 
     public static GooeyButton AbilitiesButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent textComponent:InfoUtil.returnAbilities(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent textComponent : InfoUtil.returnAbilities(pokemon)) {
             lore.add(textComponent.getString());
         }
         return GooeyButton.builder()
@@ -230,8 +224,8 @@ public class WikiGUI
     }
 
     public static GooeyButton CatchRateButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent textComponent:InfoUtil.returnCatchRates(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent textComponent : InfoUtil.returnCatchRates(pokemon)) {
             lore.add(textComponent.getString());
         }
         return GooeyButton.builder()
@@ -242,8 +236,8 @@ public class WikiGUI
     }
 
     public static GooeyButton SpawnLocationsButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnPokemonSpawnLocationTypes(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnPokemonSpawnLocationTypes(pokemon)) {
             lore.add(component.getString());
         }
         return GooeyButton.builder()
@@ -254,8 +248,8 @@ public class WikiGUI
     }
 
     public static GooeyButton SpawnTimesButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnPokemonSpawnTimes(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnPokemonSpawnTimes(pokemon)) {
             lore.add(component.getString());
         }
         return GooeyButton.builder()
@@ -266,10 +260,9 @@ public class WikiGUI
     }
 
 
-
     public static GooeyButton BiomesButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnPokemonSpawnBiomes(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnPokemonSpawnBiomes(pokemon)) {
             lore.add(component.getString());
         }
         return GooeyButton.builder()
@@ -280,9 +273,9 @@ public class WikiGUI
     }
 
     public static GooeyButton BaseStatButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
+        List<String> lore = new ArrayList<>();
 
-        for (ITextComponent component:InfoUtil.returnPokemonBaseStats(pokemon)) {
+        for (ITextComponent component : InfoUtil.returnPokemonBaseStats(pokemon)) {
             lore.add(component.getString());
         }
 
@@ -297,10 +290,10 @@ public class WikiGUI
         return s.replaceAll("&", "§");
     }
 
-    public static List <String> formattedArrayList(List<String> list) {
+    public static List<String> formattedArrayList(List<String> list) {
 
-        List<String> formattedList = new ArrayList <>();
-        for (String s:list) {
+        List<String> formattedList = new ArrayList<>();
+        for (String s : list) {
             formattedList.add(formattedString(s));
         }
 
@@ -308,11 +301,11 @@ public class WikiGUI
     }
 
     public static GooeyButton TypeButton(Pokemon pokemon) {
-        List<String> lore = new ArrayList <>();
-        for (ITextComponent component:InfoUtil.returnPokemonTypes(pokemon)) {
+        List<String> lore = new ArrayList<>();
+        for (ITextComponent component : InfoUtil.returnPokemonTypes(pokemon)) {
             lore.add(component.getString());
         }
-        for (ITextComponent component:InfoUtil.returnEggGroups(pokemon)) {
+        for (ITextComponent component : InfoUtil.returnEggGroups(pokemon)) {
             lore.add(component.getString());
         }
         //add lvl range

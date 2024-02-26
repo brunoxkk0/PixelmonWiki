@@ -137,8 +137,8 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    compileOnly fileTree(dir: "libs", include:"*.*")
-    compileOnly ('ca.landonjw:GooeyLibs:1.16.5-2.3.3-SNAPSHOT')
+    compileOnly fileTree(dir: "libs", include: "*.*")
+    compileOnly('ca.landonjw:GooeyLibs:1.16.5-2.3.3-SNAPSHOT')
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
